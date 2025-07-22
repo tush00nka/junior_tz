@@ -9,6 +9,7 @@
 
 # Quick start
 1. Create a `config.env` file or set the environment variables: `DB_DSN`, `SERVER_PORT`
-2. ```bash
+2. Build and run the server (currently no Docker Compose):
+```bash
 go run tz
 ```
