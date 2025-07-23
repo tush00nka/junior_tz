@@ -200,6 +200,8 @@ func (h *SubscriptionHandler) getSummary(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
+	// It may be a good idea to put this logic in the DB request itself,
+	// but the current Filter() seems to be a more universal tool, not for calculating the total cost only
 	var cost uint = 0
 	for _, sub := range subs {
 		cost += sub.Price

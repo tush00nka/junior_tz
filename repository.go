@@ -58,6 +58,7 @@ func (r *subscriptionRepository) Filter(startDate time.Time, endDate time.Time, 
 	query := r.db.Model(&Subscription{})
 
 	// We find subscriptions even if they fit in the time range partially
+	// If end date is not set for subscription, it is considered endless and therefore not taken into account
 	if !startDate.IsZero() && !endDate.IsZero() {
 		query = query.Where("start_date <= ? AND end_date >= ?", endDate, startDate)
 	} else if !startDate.IsZero() {
