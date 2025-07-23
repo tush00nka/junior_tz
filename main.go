@@ -23,7 +23,7 @@ func main() {
 		log.Fatal("Error loading config: ", err)
 	}
 
-	db, err := NewDB(config.DSN)
+	db, err := NewDB(fmt.Sprintf("host=db user=%s password=%s dbname=%s port=5432 sslmode=disable", config.User, config.Password, config.Name))
 	if err != nil {
 		log.Fatal("failed to init DB", err)
 	}
@@ -42,6 +42,6 @@ func main() {
 
 	log.Printf("Listening on port: %d...\n", config.Port)
 
-	addr := fmt.Sprintf("localhost:%d", config.Port)
+	addr := fmt.Sprintf(":%d", config.Port)
 	log.Fatal(http.ListenAndServe(addr, router))
 }

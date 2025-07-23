@@ -7,14 +7,15 @@ import (
 )
 
 type Config struct {
-	DSN  string `mapstructure:"DB_DSN"`
-	Port uint   `mapstructure:"SERVER_PORT"`
+	User     string `mapstructure:"DB_USER"`
+	Password string `mapstructure:"DB_PASSWORD"`
+	Name     string `mapstructure:"DB_NAME"`
+	Port     uint   `mapstructure:"SERVER_PORT"`
 }
 
 func LoadConfig() (*Config, error) {
 	viper.AddConfigPath("./")
-	viper.SetConfigName("config")
-	viper.SetConfigType("env")
+	viper.SetConfigFile(".env")
 	viper.AutomaticEnv()
 
 	if err := viper.ReadInConfig(); err != nil {
@@ -26,8 +27,16 @@ func LoadConfig() (*Config, error) {
 		return nil, err
 	}
 
-	if cfg.DSN == "" {
-		return nil, fmt.Errorf("DB_DSN is required")
+	if cfg.User == "" {
+		return nil, fmt.Errorf("DB_USER is required")
+	}
+
+	if cfg.Password == "" {
+		return nil, fmt.Errorf("DB_PASSWORD is required")
+	}
+
+	if cfg.Name == "" {
+		return nil, fmt.Errorf("DB_NAME is required")
 	}
 
 	return &cfg, nil

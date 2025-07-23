@@ -8,7 +8,9 @@
 - `swaggo/swag` for Swagger generation
 
 # Quick start
-1. Create a `config.env` file or set the environment variables: `DB_DSN`, `SERVER_PORT`
-2. ```bash
-go run tz
+Create a `.env` file or set the environment variables: `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `SERVER_PORT`
+Run: 
+
+```bash
+docker-compose up
 ```
