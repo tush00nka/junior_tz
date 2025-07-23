@@ -32,6 +32,8 @@ func main() {
 	subscriptionHandler := NewSubscriptionHandler(subscriptionRepository)
 
 	router := mux.NewRouter()
+	router.Use(loggingMiddleware)
+
 	subscriptionHandler.RegisterRoutes(router)
 
 	router.HandleFunc("/swagger/doc.json", func(w http.ResponseWriter, r *http.Request) {
